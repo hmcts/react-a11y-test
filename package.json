@@ -50,7 +50,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "jsdom": "^23.0.1",
-    "lighthouse": "^11.4.0",
+    "lighthouse": "^12.8.2",
     "playwright": "^1.40.0",
     "postcss": "^8.4.31",
     "sass": "^1.69.5",
