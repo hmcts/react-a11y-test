@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "5.2.2",
-    "@ministryofjustice/frontend": "7.1.1",
+    "@ministryofjustice/frontend": "8.0.0",
     "clsx": "2.1.1",
     "cors": "2.8.5",
     "express": "5.2.1",
