@@ -1,6 +1,6 @@
 # Multi-stage build for React A11y Test application
 # Stage 1: Build the React application
-FROM node:24.11.1-alpine AS builder
+FROM node:24.13.0-alpine AS builder
 
 # Set working directory
 WORKDIR /app
@@ -18,7 +18,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Production server
-FROM node:24.11.1-alpine AS production
+FROM node:24.13.0-alpine AS production
 
 # Install dumb-init for proper signal handling
 RUN apk add --no-cache dumb-init
