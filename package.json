@@ -77,7 +77,7 @@
     "wait-on": "9.0.3"
   },
   "overrides": {
-    "tmp": "0.2.4"
+    "tmp": "0.2.5"
   },
   "engines": {
     "node": "24.11.1",
