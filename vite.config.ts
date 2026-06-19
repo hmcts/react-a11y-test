@@ -78,6 +78,9 @@ export default defineConfig({
     },
   },
   css: {
+    lightningcss: {
+      errorRecovery: true,
+    },
     preprocessorOptions: {
       scss: {
         additionalData: `
@@ -89,18 +92,19 @@ export default defineConfig({
     },
   },
   build: {
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom'],
-          router: ['react-router-dom'],
-          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
-          performance: ['react-window', 'react-window-infinite-loader'],
+        codeSplitting: {
+          groups: [
+            { name: 'vendor', test: /node_modules\/(react|react-dom)\// },
+            { name: 'router', test: /node_modules\/react-router-dom\// },
+            { name: 'forms', test: /node_modules\/(react-hook-form|@hookform\/resolvers|zod)\// },
+            { name: 'performance', test: /node_modules\/(react-window|react-window-infinite-loader)\// },
+          ],
         },
       },
     },
     target: 'es2015',
-    minify: 'esbuild',
     sourcemap: true,
   },
   server: {
