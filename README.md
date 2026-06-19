@@ -51,7 +51,7 @@ Client-side SPA only — React renders entirely in the browser via Vite; Express
 - **ESLint v9** for code quality
 - **TypeScript ESLint v8** for TypeScript linting
 
-## 🏃‍♂️ Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+ 
