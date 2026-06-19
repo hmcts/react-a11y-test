@@ -58,16 +58,18 @@ For better consistency and reliability, use Docker deployment:
 
 3. **Environment Variables**:
    - `NODE_ENV`: `production`
-   - `PORT`: `3000`
+   - `PORT`: Set automatically by Render (do not override)
 
 ### 4. Alternative: Use render.yaml
 
-If you prefer configuration as code, you can use the included `render.yaml` file:
+If you prefer configuration as code, use the included `render.yaml` file:
 
 1. Ensure `render.yaml` is in your repository root
-2. When creating the service, select "From render.yaml"
-3. Choose between Docker or Node.js deployment
-4. Render will automatically use the configuration from the file
+2. In Render, click **New +** → **Blueprint**
+3. Connect your Git repository — Render reads `render.yaml` and creates the Docker web service
+4. The service uses `./Dockerfile`, exposes `/health`, and listens on Render's assigned `PORT`
+
+For a native Node.js deployment instead of Docker, create a web service manually with `buildCommand: npm ci && npm run build` and `startCommand: npm start` (see steps above).
 
 ## Features Included
 
