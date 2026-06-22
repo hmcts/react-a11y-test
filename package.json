@@ -37,7 +37,7 @@
     "moment": "^2.30.1",
     "react": "19.2.7",
     "react-dom": "19.2.7",
-    "react-hook-form": "7.79.0",
+    "react-hook-form": "7.80.0",
     "react-router-dom": "7.18.0",
     "react-window": "2.2.7",
     "react-window-infinite-loader": "2.0.1",
