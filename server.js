@@ -15,7 +15,7 @@ app.use(express.json())
 
 // Debug middleware to log static file requests
 app.use('/assets', (req, res, next) => {
-  console.log(`📁 Static file request: ${req.path}`)
+  console.log(`Static file request: ${req.path}`)
   next()
 })
 
@@ -244,10 +244,10 @@ app.use((req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
-app.listen(port, () => {
-  console.log(`🚀 React A11y Test app running on port ${port}`)
-  console.log(`📊 Analytics dashboard available at /api/analytics/`)
-  console.log(`🔍 Health check available at /health`)
+app.listen(port, '0.0.0.0', () => {
+  console.log(`React A11y Test app running on port ${port}`)
+  console.log(`Analytics dashboard available at /api/analytics/`)
+  console.log(`Health check available at /health`)
 })
 
 export default app

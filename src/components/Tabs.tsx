@@ -26,7 +26,7 @@ export const Tabs: React.FC<TabsProps> = ({ items }) => {
   }
 
   const handleKeyDown = (event: React.KeyboardEvent, index: number) => {
-    let newIndex = index
+    let newIndex: number
 
     switch (event.key) {
       case 'ArrowLeft':

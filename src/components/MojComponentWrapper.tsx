@@ -19,7 +19,7 @@ export const MojComponentWrapper: React.FC<MojComponentWrapperProps> = ({
       // This ensures interactive components work properly
       const initMojComponents = async () => {
         try {
-          // Dynamic import to avoid SSR issues
+          // Dynamic import keeps MoJ JavaScript in a separate client-side chunk
           const { initAll } = await import('@ministryofjustice/frontend')
           initAll({ scope: ref.current || undefined })
         } catch (error) {
