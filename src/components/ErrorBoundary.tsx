@@ -46,7 +46,7 @@ export class ErrorBoundary extends Component<Props, State> {
                 Refresh page
               </Button>
               
-              {process.env.NODE_ENV === 'development' && this.state.error && (
+              {import.meta.env.DEV && this.state.error && (
                 <details className="govuk-details">
                   <summary className="govuk-details__summary">
                     <span className="govuk-details__summary-text">

@@ -1,59 +1,37 @@
-# Multi-stage build for React A11y Test application
-# Stage 1: Build the React application
-FROM node:24.11.1-alpine AS builder
+# Multi-stage build for React A11y Test SPA
+# Stage 1: Build the client application
+FROM node:24.17.0-alpine AS builder
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
 COPY package*.json ./
+RUN npm ci
 
-# Install dependencies (including dev dependencies for build)
-RUN npm install
-
-# Copy source code
 COPY . .
-
-# Build the application
 RUN npm run build
 
-# Stage 2: Production server
-FROM node:24.11.1-alpine AS production
+# Stage 2: Production Express static server
+FROM node:24.17.0-alpine AS production
 
-# Install dumb-init for proper signal handling
-RUN apk add --no-cache dumb-init
+RUN apk add --no-cache dumb-init wget
 
-# Create app user for security
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S nextjs -u 1001
+RUN addgroup -g 1001 -S nodejs \
+  && adduser -S appuser -u 1001 -G nodejs
 
-# Set working directory
 WORKDIR /app
 
-# Copy package files
 COPY package*.json ./
+RUN npm ci --omit=dev && npm cache clean --force
 
-# Install only production dependencies
-RUN npm install --only=production && npm cache clean --force
+COPY --from=builder --chown=appuser:nodejs /app/dist ./dist
+COPY --chown=appuser:nodejs server.js ./
 
-# Copy built application from builder stage
-COPY --from=builder --chown=nextjs:nodejs /app/dist ./dist
+USER appuser
 
-# Copy server files
-COPY --chown=nextjs:nodejs server.js ./
-
-# Switch to non-root user
-USER nextjs
-
-# Expose port
 EXPOSE 3000
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3000/health', (res) => { process.exit(res.statusCode === 200 ? 0 : 1) })"
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD ["sh", "-c", "wget -qO- http://127.0.0.1:${PORT:-3000}/health > /dev/null || exit 1"]
 
-# Use dumb-init to handle signals properly
 ENTRYPOINT ["dumb-init", "--"]
-
-# Start the application
 CMD ["node", "server.js"]
