@@ -1,12 +1,10 @@
-# Note: 🚨🚨This proof of concept (PoC) is no longer maintained, leaving the code here for future reference. Feel free to archive if required. 🚨🚨
-
 # React A11y Test
 
 A React-based Single Page Application (SPA) built with GOV.UK and MoJ Design Systems to demonstrate accessibility and performance best practices.
 
 ## 🎯 Purpose
 
-This proof of concept explores how accessible and performant a React SPA can be when built with GOV.UK and MoJ Design System components. It serves as a testing ground for:
+This project is a client-side React single-page application (SPA). It explores how accessible and performant a React SPA can be when built with GOV.UK and MoJ Design System components. It serves as a testing ground for:
 
 - **Accessibility**: WCAG 2.1 AA compliance, screen reader support, keyboard navigation
 - **Performance**: Bundle optimization, lazy loading, memoization, virtual scrolling
@@ -39,6 +37,8 @@ This proof of concept explores how accessible and performant a React SPA can be 
 
 ## 🛠️ Tech Stack
 
+Client-side SPA only — React renders entirely in the browser via Vite; Express serves the static build and API endpoints in production.
+
 - **React 19** with TypeScript
 - **Vite 7** for build tooling
 - **GOV.UK Frontend v5.11.2** for design system
@@ -51,7 +51,7 @@ This proof of concept explores how accessible and performant a React SPA can be 
 - **ESLint v9** for code quality
 - **TypeScript ESLint v8** for TypeScript linting
 
-## 🏃‍♂️ Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+ 
