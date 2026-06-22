@@ -2,5 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>hmcts/.github:renovate-config"
+  ],
+  "packageRules": [
+    {
+      "description": "Stay on GOV.UK Frontend v5 until a v6 migration is planned",
+      "matchPackageNames": ["govuk-frontend"],
+      "allowedVersions": "<6.0.0"
+    },
+    {
+      "description": "Stay on MoJ Frontend v8 until a v9 migration is planned",
+      "matchPackageNames": ["@ministryofjustice/frontend"],
+      "allowedVersions": "<9.0.0"
+    }
   ]
 }
