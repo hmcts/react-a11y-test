@@ -62,11 +62,8 @@ pids
 .cache
 .parcel-cache
 
-# Next.js build output
-.next
-
-# Nuxt.js build / generate output
-.nuxt
+# Vite build output
+dist
 
 # Gatsby files
 .cache/
