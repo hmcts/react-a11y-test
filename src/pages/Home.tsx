@@ -10,7 +10,7 @@ export const Home: React.FC = () => {
             React Single-page Application (SPA) Proof of Concept
           </h1>
           <p className="govuk-body-l">
-            Welcome to the React + Next.js for SSR GOV.UK Frontend application, this is the homepage of the application. The FaCT journey starts below
+            Welcome to this React single-page application built with the GOV.UK and MoJ Design Systems. The FaCT journey starts below.
           </p>
         </div>
       </div>

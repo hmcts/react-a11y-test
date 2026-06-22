@@ -1,27 +1,18 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+#
+# Deploy via Render Dashboard → New → Blueprint → connect this repository.
+# Render sets PORT automatically — do not override it.
+#
+# For native Node.js deployment (no Docker), see DEPLOYMENT.md.
+
 services:
-  # Docker-based deployment (recommended)
   - type: web
-    name: react-a11y-test-docker
-    env: docker
+    name: react-a11y-test
+    runtime: docker
     plan: free
     dockerfilePath: ./Dockerfile
+    dockerContext: .
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 3000
-
-  # Alternative: Node.js native deployment (fallback)
-  - type: web
-    name: react-a11y-test-node
-    env: node
-    plan: free
-    buildCommand: npm ci && npm run build
-    startCommand: node server.js
-    healthCheckPath: /health
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: PORT
-        value: 10000
