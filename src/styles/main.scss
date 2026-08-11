@@ -1253,13 +1253,13 @@ body {
 
 .app-main {
   flex: 1;
+}
 
-  // #main-content is only ever focused programmatically on route change
-  // (tabindex="-1", not part of the tab order), so it doesn't need a
-  // visible focus indicator here.
-  &:focus {
-    outline: none;
-  }
+// <body> is only ever focused programmatically on route change
+// (tabindex="-1", not part of the tab order), so it doesn't need a
+// visible focus indicator here.
+body:focus {
+  outline: none;
 }
 
 // Ensure proper header alignment
