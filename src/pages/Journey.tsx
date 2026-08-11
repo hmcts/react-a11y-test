@@ -99,29 +99,6 @@ export const Journey: React.FC = () => {
           </p>
         </div>
       </div>
-
-      <div className="govuk-grid-row govuk-!-margin-top-6">
-        <div className="govuk-grid-column-two-thirds">
-          <h2 className="govuk-heading-l">Enter a court name, address, town or city</h2>
-          
-          <p className="govuk-body">
-            For example, 'Manchester Civil Justice Centre' or 'SW1H 9AJ'
-          </p>
-          
-          <div className="govuk-form-group">
-            <label className="govuk-label" htmlFor="court-search">
-              Search for a court or tribunal
-            </label>
-            <input 
-              className="govuk-input" 
-              id="court-search" 
-              name="court-search" 
-              type="text" 
-              aria-describedby="court-search-hint"
-            />
-          </div>
-        </div>
-      </div>
     </>
   )
 }
