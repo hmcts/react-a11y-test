@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ErrorMessage, ErrorSummary } from '@/components'
+import { setFocus } from '@/utils/setFocus'
 
 export const JourneySearch: React.FC = () => {
   const [selectedOption, setSelectedOption] = useState<string>('')
@@ -11,7 +12,7 @@ export const JourneySearch: React.FC = () => {
   useEffect(() => {
     // Focus on error summary when validation error occurs
     if (validationError && errorSummaryRef.current) {
-      errorSummaryRef.current.focus()
+      setFocus(errorSummaryRef.current)
     }
   }, [validationError])
 
@@ -48,17 +49,16 @@ export const JourneySearch: React.FC = () => {
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-two-thirds">
           {validationError && (
-            <div ref={errorSummaryRef}>
-              <ErrorSummary
-                title="There is a problem"
-                errorList={[
-                  {
-                    text: validationError,
-                    href: '#know-name-yes'
-                  }
-                ]}
-              />
-            </div>
+            <ErrorSummary
+              ref={errorSummaryRef}
+              title="There is a problem"
+              errorList={[
+                {
+                  text: validationError,
+                  href: '#know-name-yes'
+                }
+              ]}
+            />
           )}
 
           <h1 className="govuk-heading-xl">
