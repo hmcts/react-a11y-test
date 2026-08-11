@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { ErrorMessage, ErrorSummary } from '@/components'
 import { setFocus } from '@/utils/setFocus'
 import { courtData } from '@/data/courts'
@@ -77,6 +77,14 @@ export const JourneySearchByName: React.FC = () => {
 
   return (
     <>
+      {/* /journey/search-by-name currently only has one way in - answering
+          "yes" on /journey/search - so the back link can carry that known
+          answer directly, letting that page restore the radio selection
+          without a general cross-page state store. */}
+      <Link to="/journey/search?know-name=yes" className="govuk-back-link">
+        Back
+      </Link>
+
       <div className="govuk-grid-row">
         <div className="govuk-grid-column-two-thirds">
           {validationError && (
