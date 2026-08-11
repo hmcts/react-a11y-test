@@ -15,7 +15,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <Header />
       <div className="govuk-width-container">
         <PhaseBanner />
-        <main className="govuk-main-wrapper app-main" id="main-content" role="main">
+        <main className="govuk-main-wrapper app-main" id="main-content" role="main" tabIndex={-1}>
           {children}
         </main>
       </div>
