@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
 import { copyFileSync, mkdirSync, existsSync, readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import * as sass from 'sass'
 
 // Strip invisible Unicode that triggers Renovate warnings (present in upstream GOV.UK CSS)
 const stripHiddenUnicode = (content: string): string =>
@@ -68,12 +69,55 @@ const copyGovukAssets = () => {
   }
 }
 
+// In production, Vite statically links the compiled main.scss into
+// index.html, so the <noscript> fallback in it renders correctly without
+// JavaScript. In dev, that stylesheet is only ever injected via the JS
+// module import in main.tsx (Vite serves .scss requests as JS modules that
+// inject a <style> tag at runtime, even when linked directly via <link> -
+// there's no way to get plain text/css out of the dev server for it), so
+// the same <noscript> content looks broken with JavaScript disabled while
+// running `vite dev`. Pre-compile it to a real static CSS file up front,
+// the same way govuk-frontend's CSS is copied into public/assets below,
+// and link that file for the dev server only (apply: 'serve') - so local
+// no-JS testing matches production, without duplicating the stylesheet in
+// the built output.
+const compileDevStylesheet = () => {
+  const publicDir = join(__dirname, 'public/assets')
+
+  if (!existsSync(publicDir)) {
+    mkdirSync(publicDir, { recursive: true })
+  }
+
+  try {
+    const result = sass.compile(join(__dirname, 'src/styles/main.scss'), {
+      loadPaths: [join(__dirname, 'node_modules')],
+      quietDeps: true,
+      silenceDeprecations: ['legacy-js-api', 'import', 'global-builtin', 'color-functions', 'slash-div'],
+    })
+    writeFileSync(join(publicDir, 'main.dev.css'), result.css)
+  } catch (error) {
+    console.warn('Could not compile dev stylesheet:', error)
+  }
+}
+
 // Copy assets on startup
 copyGovukAssets()
+compileDevStylesheet()
+
+const injectDevOnlyStylesheet = () => ({
+  name: 'inject-dev-only-stylesheet',
+  apply: 'serve' as const,
+  transformIndexHtml(html: string) {
+    return html.replace(
+      '<link rel="stylesheet" href="/assets/govuk-frontend.min.css" />',
+      '<link rel="stylesheet" href="/assets/govuk-frontend.min.css" />\n    <link rel="stylesheet" href="/assets/main.dev.css" />'
+    )
+  },
+})
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), injectDevOnlyStylesheet()],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
