@@ -1255,10 +1255,10 @@ body {
   flex: 1;
 }
 
-// <body> is only ever focused programmatically on route change
+// #app-container is only ever focused programmatically on route change
 // (tabindex="-1", not part of the tab order), so it doesn't need a
 // visible focus indicator here.
-body:focus {
+#app-container:focus {
   outline: none;
 }
 
