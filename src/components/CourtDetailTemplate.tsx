@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { CourtData } from '@/data/courts/courtData'
 
 interface CourtDetailTemplateProps {
@@ -7,9 +7,20 @@ interface CourtDetailTemplateProps {
 }
 
 export const CourtDetailTemplate: React.FC<CourtDetailTemplateProps> = ({ court }) => {
+  const location = useLocation()
+  const searchQuery = (location.state as { searchQuery?: string } | null)?.searchQuery
+
+  // Only ever used as a query *value*, appended via URLSearchParams (which
+  // percent-encodes it) - never as the link's scheme/path - so it can't be
+  // used to inject a javascript: URI or otherwise hijack the link, however
+  // it's typed on the way in.
+  const backLinkTo = searchQuery
+    ? `/journey/search-by-name?${new URLSearchParams({ q: searchQuery }).toString()}`
+    : '/journey/search-by-name'
+
   return (
     <>
-      <Link to="/journey/search-by-name" className="govuk-back-link">
+      <Link to={backLinkTo} className="govuk-back-link">
         Back to search results
       </Link>
 

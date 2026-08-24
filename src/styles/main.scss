@@ -1255,6 +1255,13 @@ body {
   flex: 1;
 }
 
+// #app-container is only ever focused programmatically on route change
+// (tabindex="-1", not part of the tab order), so it doesn't need a
+// visible focus indicator here.
+#app-container:focus {
+  outline: none;
+}
+
 // Ensure proper header alignment
 .govuk-header {
   .govuk-header__container {
@@ -1340,6 +1347,13 @@ body {
     max-width: 400px;
     width: 100%;
   }
+}
+
+// Journey Search Results container is only ever focused programmatically
+// after a search is submitted (tabindex applied transiently, not part of
+// the tab order), so it doesn't need a visible focus indicator here.
+.journey-search-results__container:focus {
+  outline: none;
 }
 
 // Journey Search Results - ensure links stay unvisited blue
