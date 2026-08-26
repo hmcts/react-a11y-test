@@ -45,7 +45,7 @@
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@axe-core/react": "4.11.3",
+    "@axe-core/react": "4.13.0",
     "@eslint/js": "10.0.1",
     "@lhci/cli": "0.15.1",
     "@playwright/test": "1.61.0",
