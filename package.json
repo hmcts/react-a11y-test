@@ -82,7 +82,7 @@
     "esbuild": "0.28.1",
     "js-yaml": "5.0.0",
     "uuid": "14.0.1",
-    "@sentry/node": "10.59.0",
+    "@sentry/node": "10.73.0",
     "@opentelemetry/core": "2.8.0"
   },
   "engines": {
