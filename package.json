@@ -79,7 +79,7 @@
   },
   "overrides": {
     "tmp": "0.2.7",
-    "esbuild": "0.28.1",
+    "esbuild": "0.28.2",
     "js-yaml": "5.0.0",
     "uuid": "14.0.1",
     "@sentry/node": "10.59.0",
